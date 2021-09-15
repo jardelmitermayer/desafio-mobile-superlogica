@@ -1,6 +1,6 @@
 import React from 'react';
-import { Text, Image, View } from 'react-native';
-import { Card, Status, Name, LocationBold, Location } from './styles'
+import { Text, Image, View, Pressable } from 'react-native';
+import { Card, Status, Name, LocationBold, Location, Favorite } from './styles'
 import { Icon } from 'react-native-elements'
 
 type Character = {
@@ -38,7 +38,13 @@ const CharacterCard = ({data}: CharacterCardProps) => {
           <LocationBold> Location:</LocationBold>
           <Location> {data.location.name}</Location>
         </View>      
-      
+        <Favorite>
+          <Icon 
+            name="star-o"
+            type="font-awesome"            
+            size={26}
+          /> 
+        </Favorite>
       </View>
     </Card>
   )

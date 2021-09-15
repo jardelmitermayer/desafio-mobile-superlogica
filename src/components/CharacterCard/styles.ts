@@ -27,3 +27,6 @@ export const Location = styled.Text`
   margin:4px 0 5px 5px;
 `;
 
+export const Favorite = styled.Pressable`
+  margin: 7px 0 0 1px;
+`;
