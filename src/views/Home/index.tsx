@@ -1,9 +1,9 @@
 import React, { useEffect, useState} from 'react';
 import { useDispatch } from 'react-redux';
-import { Container, Title, ClickMeButton } from './styles';
+import { Container } from './styles';
 
 import exampleSlice from '../../redux/reducers/example';
-import { FlatList, Text, SafeAreaView, View } from 'react-native';
+import { FlatList, Text, ActivityIndicator , View } from 'react-native';
 import api from '../../services/api';
 import CharacterCard from '../../components/CharacterCard';
 
@@ -50,13 +50,17 @@ const Home: React.FC = () => {
 
   async function getCharacters() {
     
-    
     const { data } = await api.get(`/character/?page=${page}`);
+
     if (data.info.next === null ){
       setLoadingAll(true);
     }
-    //setCharacters( oldCharacters => [...oldCharacters, data.results])
-    setCharacters(data.results)
+    if (page > 1) {      
+      setCharacters( oldCharacters => [...oldCharacters, ...data.results])
+      console.log('after page', characters)
+    } else {
+      setCharacters(data.results)
+    }
   }
 
   function handleFetchMore(distance: number) {
@@ -71,12 +75,20 @@ const Home: React.FC = () => {
   useEffect(() => {
     getCharacters();
   }, [])
+
   return (
     <Container>
       <FlatList 
         data={characters} 
         keyExtractor={(item) => String(item.id)}
-        renderItem={({ item }) => <CharacterCard data={item}/>}          
+        renderItem={({ item }) => 
+          <CharacterCard data={item} />
+        }
+        onEndReached={({ distanceFromEnd }) => handleFetchMore(distanceFromEnd)}
+        onEndReachedThreshold={0.1}
+        ListFooterComponent={
+            loadingMore ? <ActivityIndicator  size="large" color="#00ff00"/> : <></>
+        } 
       /> 
       
     </Container>
