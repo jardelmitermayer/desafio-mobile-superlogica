@@ -36,23 +36,3 @@ export const Favorite = styled.Pressable`
   top:-10px;
   left:-5px;
 `;
-
-export const ModalView = styled.View`
-  flex:1;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background:  rgba(255, 255, 255, 0.95);
-  
-`;
-
-export const CircleImage = styled.Image`
-  border-radius: 100px;
-  width: 150px;
-  height: 150px;
-`;
-
-export const BoldText = styled.Text`
-  font-size: 15px;
-  font-weight: 700;
-`;
