@@ -4,13 +4,13 @@ type Character = {
   status: string,
   species: string,
   image: string,
-  origin:{
-    name:string
+  origin: {
+    name: string
   }
   location: {
     name: string
   }
-  episode:string[]
+  episode: string[]
 }
 
 export default Character;
