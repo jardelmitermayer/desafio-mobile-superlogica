@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, View, Text } from 'react-native';
+import { FlatList, View } from 'react-native';
 import CharacterCard from '../../components/CharacterCard';
 import Character from '../../types/character';
 import { loadFavoriteCharacter } from '../../types/favoriteCharacter';

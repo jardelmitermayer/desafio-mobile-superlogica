@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, ActivityIndicator, Text  } from 'react-native';
+import { FlatList, ActivityIndicator, Text } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import { Icon } from 'react-native-elements';
@@ -9,7 +9,6 @@ import { Container, FavoriteButton, FavoriteButtonText, Filters, Input } from '.
 import api from '../../services/api';
 import CharacterCard from '../../components/CharacterCard';
 import CharacterType from '../../types/character';
-import FilterByName from '../FilterByName';
 
 const Home: React.FC = () => {
   //const dispatch = useDispatch();
@@ -39,7 +38,7 @@ const Home: React.FC = () => {
     setPage(oldValue => oldValue + 1);
     getCharacters();
   }
-  function handleFilterName(name: string){
+  function handleFilterName(name: string) {
     navigation.navigate('FilterByName', name)
   }
 
@@ -50,21 +49,21 @@ const Home: React.FC = () => {
   return (
     <Container>
       <Filters>
-      <FavoriteButton onPress={() => navigation.navigate('FavoriteCharacters')}>        
-        <FavoriteButtonText>Favorite </FavoriteButtonText>
-        <Icon
-          name="heart"
-          color="red"
-          type="font-awesome"
-          size={20}
+        <FavoriteButton onPress={() => navigation.navigate('FavoriteCharacters')}>
+          <FavoriteButtonText>Favorite </FavoriteButtonText>
+          <Icon
+            name="heart"
+            color="red"
+            type="font-awesome"
+            size={20}
+          />
+        </FavoriteButton>
+        <Input
+          placeholder="Type a character name here"
+          onChangeText={(value: React.SetStateAction<string>) => setFilterName(value)}
+          value={filterName}
+          onSubmitEditing={() => handleFilterName(filterName)}
         />
-      </FavoriteButton>
-      <Input 
-        placeholder="Type a character name here"
-        onChangeText={(value: React.SetStateAction<string>) => setFilterName(value)}
-        value={filterName}
-        onSubmitEditing={() => handleFilterName(filterName)}
-      />
       </Filters>
       <FlatList
         data={characters}

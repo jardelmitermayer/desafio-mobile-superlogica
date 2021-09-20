@@ -5,10 +5,6 @@ import { Text } from 'react-native';
 import CharacterType from '../../types/character'
 import { useRoute } from '@react-navigation/core';
 
-interface CharacterProps {
-  data: CharacterType
-}
-
 interface Params {
   character: CharacterType
 }
@@ -17,7 +13,7 @@ const CharacterInfo = (data: any) => {
 
   const route = useRoute();
   const { character } = route.params as Params;
-  
+
   useEffect(() => {
     console.log(character)
   }, [])

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Text, Image, Pressable, Alert } from 'react-native';
 import { Card, Row, Name, LocationBold, Location, Favorite } from './styles'
 import { Icon } from 'react-native-elements';
@@ -52,7 +52,7 @@ const CharacterCard = ({ data }: CharacterCardProps) => {
           <Location> {data.location.name}</Location>
         </Pressable>
 
-        <Favorite onPressIn={handleSave} onPressOut={() =>console.log('click')}>
+        <Favorite onPressIn={handleSave} onPressOut={() => console.log('click')}>
           <Icon
             name="heart-o"
             type="font-awesome"
