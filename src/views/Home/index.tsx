@@ -1,28 +1,29 @@
 import React, { useEffect, useState } from 'react';
+import { FlatList, ActivityIndicator, Text  } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { Container } from './styles';
 
-import exampleSlice from '../../redux/reducers/example';
-import { FlatList, Text, ActivityIndicator, View, Pressable } from 'react-native';
+import { Icon } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/core';
+
+import { Container, FavoriteButton, FavoriteButtonText, Filters, Input } from './styles';
 import api from '../../services/api';
 import CharacterCard from '../../components/CharacterCard';
 import CharacterType from '../../types/character';
-import { useNavigation } from '@react-navigation/core';
+import FilterByName from '../FilterByName';
 
 const Home: React.FC = () => {
-  const dispatch = useDispatch();
-  const [loadingAll, setLoadingAll] = useState(false);
+  //const dispatch = useDispatch();
   const [loadingMore, setLoadingMore] = useState(false);
   const [page, setPage] = useState(1);
   const [characters, setCharacters] = useState<CharacterType[]>([]);
+  const [filterName, setFilterName] = useState<string>("");
+
   const navigation = useNavigation();
+
   async function getCharacters() {
 
     const { data } = await api.get(`/character/?page=${page}`);
 
-    if (data.info.next === null) {
-      setLoadingAll(true);
-    }
     if (page > 1) {
       setCharacters(oldCharacters => [...oldCharacters, ...data.results])
     } else {
@@ -38,6 +39,9 @@ const Home: React.FC = () => {
     setPage(oldValue => oldValue + 1);
     getCharacters();
   }
+  function handleFilterName(name: string){
+    navigation.navigate('FilterByName', name)
+  }
 
   useEffect(() => {
     getCharacters();
@@ -45,9 +49,23 @@ const Home: React.FC = () => {
 
   return (
     <Container>
-      <Pressable onPress={() => navigation.navigate('FavoriteCharacters')}>
-        <Text>Favorite</Text>
-      </Pressable>
+      <Filters>
+      <FavoriteButton onPress={() => navigation.navigate('FavoriteCharacters')}>        
+        <FavoriteButtonText>Favorite </FavoriteButtonText>
+        <Icon
+          name="heart"
+          color="red"
+          type="font-awesome"
+          size={20}
+        />
+      </FavoriteButton>
+      <Input 
+        placeholder="Type a character name here"
+        onChangeText={(value: React.SetStateAction<string>) => setFilterName(value)}
+        value={filterName}
+        onSubmitEditing={() => handleFilterName(filterName)}
+      />
+      </Filters>
       <FlatList
         data={characters}
         keyExtractor={(item) => String(item.id)}

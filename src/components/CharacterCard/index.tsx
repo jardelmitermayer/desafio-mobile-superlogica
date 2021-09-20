@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { Text, Image, Pressable, Alert } from 'react-native';
 import { Card, Row, Name, LocationBold, Location, Favorite } from './styles'
 import { Icon } from 'react-native-elements';
