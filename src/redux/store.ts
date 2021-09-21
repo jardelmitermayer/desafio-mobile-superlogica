@@ -6,23 +6,23 @@ import {
 } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
+import loading from "./sagas/loadingSaga";
 
-import exampleSlice from "./reducers/example";
+import loadingSlice from "./reducers/loading";
 
-import exampleSaga from "./sagas/example";
-
-/* Reducers */ 
+/* Reducers */
 const reducers = combineReducers({
-  example: exampleSlice.reducer,
+  loading: loadingSlice.reducer
 });
 
-/* Sagas */ 
+export type RootState = ReturnType<typeof reducers>
+/* Sagas */
 export const rootSagas = function* rootSagas(): any {
-  return yield all([exampleSaga()]);
+  return yield all([loading()]);
 };
 
 
-/* Store and middlewares configuration */ 
+/* Store and middlewares configuration */
 const sagaMiddleware = createSagaMiddleware({});
 
 const middlewares: any = [];

@@ -4,6 +4,8 @@ import { Icon } from 'react-native-elements'
 import { Text } from 'react-native';
 import CharacterType from '../../types/character'
 import { useRoute } from '@react-navigation/core';
+import { RootState } from '../../redux/store';
+import { useSelector } from 'react-redux'
 
 interface Params {
   character: CharacterType
@@ -13,10 +15,7 @@ const CharacterInfo = (data: any) => {
 
   const route = useRoute();
   const { character } = route.params as Params;
-
-  useEffect(() => {
-    console.log(character)
-  }, [])
+  const loading = useSelector((state: RootState) => state)
   return (
     <CharacterInfoView>
       <CircleImage source={{ uri: character.image }} />

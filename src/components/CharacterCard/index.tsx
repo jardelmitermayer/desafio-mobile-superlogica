@@ -5,15 +5,13 @@ import { Icon } from 'react-native-elements';
 import CharacterType from '../../types/character';
 import CharacterInfo from '../../views/CharacterInfo';
 import { useNavigation } from '@react-navigation/core';
-import { saveFavoriteCharacter } from '../../types/favoriteCharacter';
-
+import { saveFavoriteCharacter } from '../../utils/favoriteCharacter';
 interface CharacterCardProps {
   data: CharacterType
 }
 
 const CharacterCard = ({ data }: CharacterCardProps) => {
   const navigation = useNavigation();
-
   function handleCharacterInfo(character: CharacterType) {
     navigation.navigate('CharacterInfo', { character });
   }
@@ -23,13 +21,13 @@ const CharacterCard = ({ data }: CharacterCardProps) => {
       await saveFavoriteCharacter({
         ...data
       })
-
     } catch {
       Alert.alert('Não foi possível favoritar seu personagem. 😭')
     }
   }
 
   return (
+
     <Card>
       <Row>
         <Pressable onPressIn={() => handleCharacterInfo(data)}>
@@ -42,7 +40,7 @@ const CharacterCard = ({ data }: CharacterCardProps) => {
             <Icon
               name="circle"
               type="font-awesome"
-              color={data.status === 'Dead' ? 'red' : 'green'}
+              color={data.status === 'Alive' ? 'green' : (data.status === 'Dead' ? 'red' : 'gray')}
               size={20}
               style={{ marginLeft: 6, marginBottom: 5 }}
             />
@@ -52,7 +50,7 @@ const CharacterCard = ({ data }: CharacterCardProps) => {
           <Location> {data.location.name}</Location>
         </Pressable>
 
-        <Favorite onPressIn={handleSave} onPressOut={() => console.log('click')}>
+        <Favorite onPressIn={handleSave}>
           <Icon
             name="heart-o"
             type="font-awesome"
@@ -64,3 +62,4 @@ const CharacterCard = ({ data }: CharacterCardProps) => {
   )
 }
 export default CharacterCard;
+

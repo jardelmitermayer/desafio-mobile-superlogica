@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Character from "./character";
+import Character from "../types/character";
 
 interface StorageFavoriteCharacter {
   [id: string]: {
@@ -26,7 +26,7 @@ export async function saveFavoriteCharacter(character: Character): Promise<void>
     )
 
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 }
 
@@ -36,19 +36,19 @@ export async function loadFavoriteCharacter(): Promise<Character[]> {
     const favoriteCharacters = data ? (JSON.parse(data) as StorageFavoriteCharacter) : {};
 
     const favoriteCharactersSorted = Object
-    .keys(favoriteCharacters)
-    .map((favoriteCharacter) => {
-      return {
-        ...favoriteCharacters[favoriteCharacter].data
-      }
-    })
-    .sort((a, b) => {
-      return(a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
-    })  
-    
+      .keys(favoriteCharacters)
+      .map((favoriteCharacter) => {
+        return {
+          ...favoriteCharacters[favoriteCharacter].data
+        }
+      })
+      .sort((a, b) => {
+        return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)
+      })
+
     return favoriteCharactersSorted;
 
   } catch (error) {
-    throw new Error(error);
+    throw error;
   }
 }

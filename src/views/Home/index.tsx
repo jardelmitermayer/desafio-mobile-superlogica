@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, ActivityIndicator, Text } from 'react-native';
-import { useDispatch } from 'react-redux';
 
 import { Icon } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/core';
@@ -11,7 +10,6 @@ import CharacterCard from '../../components/CharacterCard';
 import CharacterType from '../../types/character';
 
 const Home: React.FC = () => {
-  //const dispatch = useDispatch();
   const [loadingMore, setLoadingMore] = useState(false);
   const [page, setPage] = useState(1);
   const [characters, setCharacters] = useState<CharacterType[]>([]);
