@@ -6,13 +6,13 @@ import { useNavigation } from '@react-navigation/core';
 
 import { Container, FavoriteButton, FavoriteButtonText, Filters, Input } from './styles';
 import api from '../../services/api';
-import CharacterCard from '../../components/CharacterCard';
-import CharacterType from '../../types/character';
+import { CharacterCard } from '../../components/CharacterCard';
+import { Character } from '../../types/character';
 
-const Home: React.FC = () => {
+export const Home: React.FC = () => {
   const [loadingMore, setLoadingMore] = useState(false);
   const [page, setPage] = useState(1);
-  const [characters, setCharacters] = useState<CharacterType[]>([]);
+  const [characters, setCharacters] = useState<Character[]>([]);
   const [filterName, setFilterName] = useState<string>("");
 
   const navigation = useNavigation();
@@ -81,5 +81,3 @@ const Home: React.FC = () => {
     </Container>
   )
 }
-
-export default Home;

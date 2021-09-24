@@ -1,4 +1,4 @@
-type Character = {
+export type Character = {
   id: number,
   name: string,
   status: string,
@@ -12,5 +12,3 @@ type Character = {
   }
   episode: string[]
 }
-
-export default Character;

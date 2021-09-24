@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, View } from 'react-native';
-import CharacterCard from '../../components/CharacterCard';
-import Character from '../../types/character';
+import { CharacterCard } from '../../components/CharacterCard';
+import { Character } from '../../types/character';
 import { loadFavoriteCharacter } from '../../utils/favoriteCharacter';
 
-const FavoriteCharacters = () => {
+export const FavoriteCharacters = () => {
 
   const [myFavoriteCharacters, setMyFavoriteCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState(true);
@@ -32,5 +32,3 @@ const FavoriteCharacters = () => {
     </View>
   )
 }
-
-export default FavoriteCharacters

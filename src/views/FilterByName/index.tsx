@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { View, FlatList, ActivityIndicator } from 'react-native'
-import CharacterType from '../../types/character';
+import { Character } from '../../types/character';
 import { useRoute } from '@react-navigation/core';
 import api from '../../services/api';
-import CharacterCard from '../../components/CharacterCard';
+import { CharacterCard } from '../../components/CharacterCard';
 
 interface Params {
   name: string
 }
-const FilterByName = () => {
+export const FilterByName = () => {
 
-  const [characters, setCharacters] = useState<CharacterType[]>([]);
+  const [characters, setCharacters] = useState<Character[]>([]);
   const [page, setPage] = useState(1);
   const [loadingMore, setLoadingMore] = useState(false);
   const route = useRoute();
@@ -55,5 +55,3 @@ const FilterByName = () => {
     </View>
   )
 }
-
-export default FilterByName

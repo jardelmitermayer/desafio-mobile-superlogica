@@ -2,17 +2,17 @@ import React from 'react';
 import { Text, Image, Pressable, Alert } from 'react-native';
 import { Card, Row, Name, LocationBold, Location, Favorite } from './styles'
 import { Icon } from 'react-native-elements';
-import CharacterType from '../../types/character';
-import CharacterInfo from '../../views/CharacterInfo';
+import { Character } from '../../types/character';
+import { CharacterInfo } from '../../views/CharacterInfo';
 import { useNavigation } from '@react-navigation/core';
 import { saveFavoriteCharacter } from '../../utils/favoriteCharacter';
 interface CharacterCardProps {
-  data: CharacterType
+  data: Character
 }
 
-const CharacterCard = ({ data }: CharacterCardProps) => {
+export const CharacterCard = ({ data }: CharacterCardProps) => {
   const navigation = useNavigation();
-  function handleCharacterInfo(character: CharacterType) {
+  function handleCharacterInfo(character: Character) {
     navigation.navigate('CharacterInfo', { character });
   }
 
@@ -61,5 +61,3 @@ const CharacterCard = ({ data }: CharacterCardProps) => {
     </Card>
   )
 }
-export default CharacterCard;
-
